@@ -15,19 +15,19 @@ OptionParser.new do |opts|
 end.parse!
 
 unless options[:token].nil?
-  mambers = nil
-  mambers = JSON.parse(open("https://slack.com/api/channels.info?token=" + options[:token] + "&channel=" + options[:channel_id]).read)['channel']['members'] unless options[:channel_id].nil?
-  mambers = JSON.parse(open("https://slack.com/api/groups.info?token=" + options[:token] + "&channel=" + options[:group_id]).read)['group']['members'] unless options[:group_id].nil?   
-  if mambers
+  members = nil
+  members = JSON.parse(open("https://slack.com/api/channels.info?token=" + options[:token] + "&channel=" + options[:channel_id]).read)['channel']['members'] unless options[:channel_id].nil?
+  members = JSON.parse(open("https://slack.com/api/groups.info?token=" + options[:token] + "&channel=" + options[:group_id]).read)['group']['members'] unless options[:group_id].nil?
+  if members
     csv_string = CSV.generate do |csv|
-      csv_header = ['first_name','last_name','email']
+      csv_header = ['email']
       csv << csv_header
-      mambers.each do |member_id|
+      members.each do |member_id|
         profile = JSON.parse(open("https://slack.com/api/users.info?token=" + options[:token] + "&user=" + member_id).read)['user']
         csv << profile['profile'].select { |key,_| csv_header.include? (key) }.values unless profile['deleted']
       end
     end
     puts csv_string
   end
-end 
+end
 
