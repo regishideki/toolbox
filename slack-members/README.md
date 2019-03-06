@@ -21,16 +21,13 @@ On Slack Web interface the link to Channels or Groups contains the ID
 $ ./membersof.rb --help
 This script retrieves all members from a slack channel
 Usage: ./membersof.rb [options]
-    -t, --token Slack tocken         How to get: https://api.slack.com/custom-integrations/legacy-tokens
-    -g, --group Group ID             How to get: https://api.slack.com/methods/groups.list
-    -c, --channel Channel ID         How to get: https://api.slack.com/methods/channels.list
+-t, --token Slack tocken         How to get: https://api.slack.com/custom-integrations/legacy-tokens
+-g, --group Group ID             How to get: https://api.slack.com/methods/groups.list
+-c, --channel Channel ID         How to get: https://api.slack.com/methods/channels.list
 ```
 
-Example:
+Example getting guild-bpm channel members emails:
 Please be aware this methode can take 1-2 sec for each member. Be patient!!
 ```
-$ ./membersof.rb -t xoxp-123456789A-BCDEF01234-56789ABCDE-F012345678 -g QWERTYUIO
-first_name,last_name,email
-John,Doe,john.doe@example.com
-Jane,Doe,jane.doe@example.com
+$ ./membersof.rb -t <your-token> -g CG0TSMW92
 ```
